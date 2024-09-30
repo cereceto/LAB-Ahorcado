@@ -56,9 +56,9 @@ def pedir_letra(letras_probadas):
     - La función 'input' permite leer una cadena de texto desde la entrada estándar
     - El método 'lower' aplicado a una cadena devuelve una copia de la cadena en minúsculas
     '''
-    letra = input("Di una letra:").lower()
+    letra = input("Adivina una letra: ").lower()
     while letra in letras_probadas:
-        letra = input("Esa ya la dijiste, di otra letra:").lower()
+        letra = input("Ya has probado con esa letra. Intenta con otra: ").lower()
     return letra
 
 def comprobar_letra(palabra_secreta, letra):
@@ -69,8 +69,41 @@ def comprobar_letra(palabra_secreta, letra):
     - Devolver True si estaba y False si no
     '''
     if letra in palabra_secreta:
-        print("¡Letra correcta!")
+        print("¡Bien hecho! Esa letra está en la palabra.")
         return True
     else:
-        print("Esa letra no es correcta :-(")
+        print("Lo siento, esa letra no está en la palabra.")
         return False
+    
+def comprobar_palabra_completa(palabra_secreta, letras_probadas):
+    '''
+    Comprobar si se ha completado la palabra:
+    - Comprobar si todas las letras de la palabra secreta han sido propuestas por el usuario
+    - Devolver True si es así o False si falta alguna letra por adivinar
+    '''
+    res = True
+    if letras_probadas != {}:
+        for letra in letras_probadas:
+            if letra not in palabra_secreta:
+                res = False
+    else:
+        res = False
+    return res
+
+def ejecutar_turno(palabra_secreta, letras_probadas):
+    '''
+    Ejecutar un turno de juego:
+    - Mostrar la palabra enmascarada
+    - Pedir la nueva letra
+    - Comprobar si la letra está en la palabra (acierto) o no (fallo)
+    - Añadir la letra al conjunto de letras probadas
+    - Devolver True si la letra fue un acierto, False si fue un fallo
+    Ayuda:
+    - Recuerda las funciones que ya has implementado para mostrar la palabra, pedir la letra y comprobarla
+    '''
+    
+    print('Palabra: ',enmascarar_palabra(palabra_secreta, letras_probadas))
+    letra = pedir_letra(letras_probadas)
+    letras_probadas.add(letra)
+    return comprobar_letra(palabra_secreta, letra)
+    
