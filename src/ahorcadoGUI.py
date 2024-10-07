@@ -118,7 +118,7 @@ class AhorcadoApp:
 
 
 # Cargar palabras desde un archivo
-palabras = cargar_palabras("data/palabras_ahorcado.txt")
+palabras = cargar_palabras("WORKSPACE-LAB\LAB-Ahorcado\data\palabras_ahorcado.txt")
 
 # Crear ventana
 root = tk.Tk()
